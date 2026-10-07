@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>The Cut | Barber Queue</title>
+
+  <!-- Google Font -->
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <!-- CSS -->
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+</head>
+
+<body>
+
+  <!-- =====================================================
+       ROLE SELECTION SCREEN
+       ===================================================== -->
+
+  <section
+    id="roleScreen"
+    class="role-screen"
+  >
+
+    <div class="role-container">
+
+      <!-- Brand -->
+      <div class="role-brand">
+
+        <div class="brand-icon">
+          <i class="fa-solid fa-scissors"></i>
+        </div>
+
+        <div>
+          <span class="brand-small">
+            THE
+          </span>
+
+          <h1>
+            CUT
+          </h1>
+
+          <span class="brand-subtitle">
+            BARBER SHOP
+          </span>
+        </div>
+
+      </div>
+
+
+      <!-- Welcome -->
+      <div class="role-welcome">
+
+        <span class="eyebrow">
+          WELCOME
+        </span>
+
+        <h2>
+          Your time.<br>
+          Your turn.<br>
+          <span>Your cut.</span>
+        </h2>
+
+        <p>
+          Choose how you want to use The Cut.
+        </p>
+
+      </div>
+
+
+      <!-- Role Buttons -->
+      <div class="role-options">
+
+        <!-- CLIENT -->
+        <button
+          class="role-card client-role"
+          id="clientButton"
+          type="button"
+        >
+
+          <div class="role-icon">
+            <i class="fa-solid fa-user"></i>
+          </div>
+
+          <div class="role-content">
+
+            <span class="role-label">
+              I AM A
+            </span>
+
+            <h3>
+              CLIENT
+            </h3>
+
+            <p>
+              Join the queue and track your turn.
+            </p>
+
+          </div>
+
+          <div class="role-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </button>
+
+
+        <!-- BARBER -->
+        <button
+          class="role-card barber-role"
+          id="barberButton"
+          type="button"
+        >
+
+          <div class="role-icon">
+            <i class="fa-solid fa-scissors"></i>
+          </div>
+
+          <div class="role-content">
+
+            <span class="role-label">
+              I AM THE
+            </span>
+
+            <h3>
+              BARBER
+            </h3>
+
+            <p>
+              Manage today's queue and customers.
+            </p>
+
+          </div>
+
+          <div class="role-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </button>
+
+      </div>
+
+
+      <!-- Footer -->
+      <div class="role-footer">
+
+        <span>
+          SIMPLE
+        </span>
+
+        <span class="footer-dot">
+          •
+        </span>
+
+        <span>
+          FAST
+        </span>
+
+        <span class="footer-dot">
+          •
+        </span>
+
+        <span>
+          ORGANIZED
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       CLIENT APP
+       Hidden until CLIENT is selected
+       ===================================================== -->
+
+  <main
+    id="clientApp"
+    class="app-view hidden"
+  >
+
+    <header class="topbar">
+
+      <div class="topbar-brand">
+
+        <div class="mini-brand-icon">
+          <i class="fa-solid fa-scissors"></i>
+        </div>
+
+        <div>
+          <strong>THE CUT</strong>
+          <span>BARBER SHOP</span>
+        </div>
+
+      </div>
+
+      <button
+        class="back-button"
+        id="clientBackButton"
+        type="button"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+        Back
+      </button>
+
+    </header>
+
+
+    <!-- Client Hero -->
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <span class="eyebrow">
+          CLIENT
+        </span>
+
+        <h1>
+          Your next cut,
+          <span>without the wait.</span>
+        </h1>
+
+        <p>
+          Join the queue remotely and know exactly
+          where you stand.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- Queue Summary -->
+    <section class="queue-summary">
+
+      <div class="summary-card">
+
+        <span>
+          CURRENTLY WAITING
+        </span>
+
+        <strong id="waitingCount">
+          0
+        </strong>
+
+        <small>
+          people in queue
+        </small>
+
+      </div>
+
+      <div class="summary-card">
+
+        <span>
+          SHOP STATUS
+        </span>
+
+        <strong id="shopStatus" class="status-open">
+        OPEN
+        </strong>
+          
+
+        <small>
+          accepting customers
+        </small>
+
+      </div>
+
+    </section>
+
+
+    <!-- Client Actions -->
+    <section class="client-actions">
+
+      <button
+        id="joinQueueButton"
+        class="primary-button"
+        type="button"
+      >
+
+        <i class="fa-solid fa-plus"></i>
+
+        <span>
+          Join the Queue
+        </span>
+
+      </button>
+
+
+      <button
+        id="viewQueueButton"
+        class="secondary-button"
+        type="button"
+      >
+
+        <i class="fa-solid fa-list"></i>
+
+        <span>
+          View Current Queue
+        </span>
+
+      </button>
+
+    </section>
+
+
+    <!-- Join Queue -->
+    <section
+      id="joinQueuePanel"
+      class="panel hidden"
+    >
+
+      <div class="panel-heading">
+
+        <span class="eyebrow">
+          STEP 1
+        </span>
+
+        <h2>
+          Join the queue
+        </h2>
+
+        <p>
+          Tell us a little about your visit.
+        </p>
+
+      </div>
+
+
+      <!-- Name -->
+      <div class="form-group">
+
+        <label for="customerName">
+          YOUR NAME
+        </label>
+
+        <input
+          type="text"
+          id="customerName"
+          placeholder="Enter your name"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <!-- Service -->
+      <div class="form-group">
+
+        <label>
+          SELECT YOUR SERVICE
+        </label>
+
+
+        <div class="service-options">
+
+          <label class="service-card">
+
+            <input
+              type="radio"
+              name="service"
+              value="Haircut"
+            >
+
+            <div class="service-info">
+
+              <strong>
+                Haircut
+              </strong>
+
+              <span>
+                ~30 min
+              </span>
+
+            </div>
+
+            <i class="fa-solid fa-check"></i>
+
+          </label>
+
+
+          <label class="service-card">
+
+            <input
+              type="radio"
+              name="service"
+              value="Hair + Beard"
+            >
+
+            <div class="service-info">
+
+              <strong>
+                Hair + Beard
+              </strong>
+
+              <span>
+                ~45 min
+              </span>
+
+            </div>
+
+            <i class="fa-solid fa-check"></i>
+
+          </label>
+
+
+          <label class="service-card">
+
+            <input
+              type="radio"
+              name="service"
+              value="Beard"
+            >
+
+            <div class="service-info">
+
+              <strong>
+                Beard
+              </strong>
+
+              <span>
+                ~20 min
+              </span>
+
+            </div>
+
+            <i class="fa-solid fa-check"></i>
+
+          </label>
+
+
+          <label class="service-card">
+
+            <input
+              type="radio"
+              name="service"
+              value="Line Up"
+            >
+
+            <div class="service-info">
+
+              <strong>
+                Line Up
+              </strong>
+
+              <span>
+                ~15 min
+              </span>
+
+            </div>
+
+            <i class="fa-solid fa-check"></i>
+
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="confirmQueueButton"
+        class="primary-button full-width"
+        type="button"
+      >
+
+        Confirm & Join Queue
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+      </button>
+
+    </section>
+
+
+    <!-- Current Queue -->
+    <section
+      id="queuePanel"
+      class="panel hidden"
+    >
+
+      <div class="panel-heading">
+
+        <span class="eyebrow">
+          LIVE QUEUE
+        </span>
+
+        <h2>
+          Current queue
+        </h2>
+
+        <p>
+          See who's waiting before you.
+        </p>
+
+      </div>
+
+
+      <div
+        id="queueList"
+        class="queue-list"
+      >
+
+        <!-- Queue customers will be added by JavaScript -->
+
+        <div class="empty-queue">
+
+          <i class="fa-solid fa-chair"></i>
+
+          <p>
+            The queue is currently empty.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Customer Ticket -->
+    <section
+      id="customerTicket"
+      class="ticket hidden"
+    >
+
+      <div class="ticket-top">
+
+        <span>
+          YOUR QUEUE TICKET
+        </span>
+
+        <i class="fa-solid fa-scissors"></i>
+
+      </div>
+
+
+      <div class="ticket-position">
+
+        <small>
+          YOUR POSITION
+        </small>
+
+        <strong id="ticketPosition">
+          #1
+        </strong>
+
+      </div>
+
+
+      <div class="ticket-details">
+
+        <div>
+          <span>
+            NAME
+          </span>
+
+          <strong id="ticketName">
+            —
+          </strong>
+        </div>
+
+        <div>
+          <span>
+            SERVICE
+          </span>
+
+          <strong id="ticketService">
+            —
+          </strong>
+        </div>
+
+        <div>
+          <span>
+            EST. WAIT
+          </span>
+
+          <strong id="ticketWait">
+            —
+          </strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Client Footer -->
+    <footer class="footer">
+
+      <div class="footer-brand">
+        <span>THE CUT</span>
+        <small>BARBER SHOP</small>
+      </div>
+
+      <div class="footer-location">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Nhlangano, Eswatini</span>
+      </div>
+
+    </footer>
+
+  </main>
+
+
+  <!-- =====================================================
+       BARBER APP
+       Hidden until BARBER is selected
+       ===================================================== -->
+
+  <main
+    id="barberApp"
+    class="app-view hidden"
+  >
+
+    <header class="topbar">
+
+      <div class="topbar-brand">
+
+        <div class="mini-brand-icon">
+          <i class="fa-solid fa-scissors"></i>
+        </div>
+
+        <div>
+          <strong>THE CUT</strong>
+          <span>BARBER DASHBOARD</span>
+        </div>
+
+      </div>
+
+      <button
+        class="back-button"
+        id="barberBackButton"
+        type="button"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+        Back
+      </button>
+
+    </header>
+
+
+    <!-- Barber Hero -->
+    <section class="hero barber-hero">
+
+      <div class="hero-content">
+
+        <span class="eyebrow">
+          BARBER
+        </span>
+
+        <h1>
+          Today's
+          <span>queue.</span>
+        </h1>
+
+        <p>
+          Manage customers and keep the shop moving.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- Barber Stats -->
+    <section class="queue-summary">
+
+      <div class="summary-card">
+
+        <span>
+          WAITING
+        </span>
+
+        <strong id="barberWaitingCount">
+          0
+        </strong>
+
+        <small>
+          customers
+        </small>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <span>
+          COMPLETED
+        </span>
+
+        <strong id="completedCount">
+          0
+        </strong>
+
+        <small>
+          today
+        </small>
+
+      </div>
+
+    </section>
+
+
+    <!-- Barber Queue -->
+    <section class="panel barber-panel">
+
+      <div class="panel-heading">
+
+        <span class="eyebrow">
+          TODAY
+        </span>
+
+        <h2>
+          Customer queue
+        </h2>
+
+        <p>
+          Manage the customers currently waiting.
+        </p>
+
+      </div>
+
+
+      <div
+        id="barberQueueList"
+        class="queue-list"
+      >
+
+        <div class="empty-queue">
+
+          <i class="fa-solid fa-users"></i>
+
+          <p>
+            No customers are waiting.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Add Walk-in -->
+    <section class="panel">
+
+      <div class="panel-heading">
+
+        <span class="eyebrow">
+          WALK-IN
+        </span>
+
+        <h2>
+          Add customer
+        </h2>
+
+        <p>
+          Add someone who is already at the shop.
+        </p>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="walkInName">
+          CUSTOMER NAME
+        </label>
+
+        <input
+          type="text"
+          id="walkInName"
+          placeholder="Enter customer name"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          SERVICE
+        </label>
+
+        <select id="walkInService">
+
+          <option value="">
+            Select a service
+          </option>
+
+          <option value="Haircut">
+            Haircut — 30 min
+          </option>
+
+          <option value="Hair + Beard">
+            Hair + Beard — 45 min
+          </option>
+
+          <option value="Beard">
+            Beard — 20 min
+          </option>
+
+          <option value="Line Up">
+            Line Up — 15 min
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        id="addWalkInButton"
+        class="primary-button full-width"
+        type="button"
+      >
+
+        <i class="fa-solid fa-plus"></i>
+
+        Add to Queue
+
+      </button>
+
+    </section>
+
+
+    <!-- Barber Footer -->
+    <footer class="footer">
+
+      <div class="footer-brand">
+        <span>THE CUT</span>
+        <small>BARBER SHOP</small>
+      </div>
+
+      <div class="footer-location">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Nhlangano, Eswatini</span>
+      </div>
+
+    </footer>
+
+  </main>
+
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
