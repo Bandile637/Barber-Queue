@@ -7,6 +7,15 @@
 /* =====================================================
    ROLE SCREEN
    ===================================================== */
+   /* SUPABASE CONNECTION */
+
+const SUPABASE_URL = "https://kbzekggcwnazyjxahnnd.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_d3eOvLPGjmLYRKz7ti3aJg_X_P72Y3k";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
 const roleScreen = document.getElementById("roleScreen");
 const clientApp = document.getElementById("clientApp");
@@ -1325,3 +1334,24 @@ setInterval(
   updateShopStatus,
   60000
 );
+/* TEST SUPABASE CONNECTION */
+
+async function testSupabaseConnection() {
+  try {
+    const { data, error } = await supabaseClient
+      .from("queue")
+      .select("id")
+      .limit(1);
+
+    if (error) {
+      console.error("Supabase connection error:", error.message);
+      return;
+    }
+
+    console.log("Supabase connected successfully!", data);
+  } catch (err) {
+    console.error("Connection test failed:", err);
+  }
+}
+
+testSupabaseConnection();
